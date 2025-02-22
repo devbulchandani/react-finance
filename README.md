@@ -1,50 +1,99 @@
-# React + TypeScript + Vite
+# # Blockchain-Based Order Management System
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+\## Overview
+This application is a decentralized order management system that combines traditional e-commerce functionality with blockchain technology. It enables merchants to manage orders, handle payments, and track shipping status using smart contracts on the Ethereum Sepolia testnet.
 
-Currently, two official plugins are available:
+\## Features
+\- \*\*Wallet Authentication\*\*: Secure login using Privy wallet integration
+\- \*\*Order Management\*\*: Track and manage orders with real-time status updates
+\- \*\*Blockchain Integration\*\*: 
+  - Smart contract interaction for shipping and delivery status
+  - Automated payment processing on status changes
+  - Sepolia testnet integration
+\- \*\*Payment Handling\*\*:
+  - Secure ETH transfers to merchants upon order completion
+  - Automated refund processing for failed orders
+\- \*\*Status Tracking\*\*:
+  - PENDING: Initial order state
+  - PROCESSING: Order is being prepared/shipped
+  - COMPLETED: Order successfully delivered
+  - FAILED: Order cannot be fulfilled
+  - REFUNDED: Payment returned to customer
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+\## Technical Stack
+\- \*\*Frontend\*\*: React with TypeScript
+\- \*\*Blockchain\*\*:
+  - Ethereum (Sepolia Testnet)
+  - ethers.js for blockchain interactions
+  - Mock Oracle Contract for status tracking
+\- \*\*Authentication\*\*: Privy Wallet Integration
+\- \*\*UI Components\*\*: 
+  - shadcn/ui component library
+  - Tailwind CSS for styling
+\- \*\*State Management\*\*: React Hooks
+\- \*\*Notifications\*\*: Sonner toast notifications
 
-## Expanding the ESLint configuration
+\## Smart Contracts
+\### Mock Oracle Contract
+\- \*\*Address\*\*: \`0xF2D82330a6aD227C59604Cbd65AE522fbD352935\`
+\- \*\*Network\*\*: Sepolia Testnet
+\- \*\*Functions\*\*:
+  - \`emitShipped(uint256 shipmentId)\`: Update shipment status to shipped
+  - \`emitDelivered(uint256 shipmentId)\`: Update shipment status to delivered
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+\## Environment Setup
+\`\`\`env
+INFURA_API_KEY=your_infura_api_key
+\`\`\`
 
-- Configure the top-level `parserOptions` property like this:
+\## API Integration
+The system interfaces with several backend endpoints:
+\- \`fetchWallet\`: Retrieve wallet information
+\- \`getMerchantOrders\`: Get orders for a specific merchant
+\- \`sendServerTransaction\`: Process payments
+\- \`updateOrderStatus\`: Update order status
+\- \`getWalletBalance\`: Check wallet balance
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+\## Security Features
+\- Secure wallet authentication through Privy
+\- Server-side transaction processing
+\- Status-based payment releases
+\- Blockchain verification for shipping status
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+\## Getting Started
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+1\. Install dependencies:
+\`\`\`bash
+npm install
+\`\`\`
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+2\. Set up environment variables:
+\- Create a \`.env\` file
+\- Add required API keys and contract addresses
+
+3\. Start the development server:
+\`\`\`bash
+npm run dev
+\`\`\`
+
+\## Component Usage
+\`\`\`tsx
+import { MerchantOrders } from './components/MerchantOrders';
+
+function App() {
+  return <MerchantOrders />;
+}
+\`\`\`
+
+\## Contributing
+\[Add contribution guidelines here\]
+
+\## License
+\[Add license information here\]
+
+\## Support
+\[Add support contact information here\]
+
+\---
+
+Note: This project uses the Sepolia testnet. Make sure you have test ETH before interacting with the contracts.
